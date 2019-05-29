@@ -2,19 +2,19 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   labels:
-    app: cicd-pipeline
+    app: integrated-cicd-pipeline
     role: jenkins-slave
-  name: jenkins-slaves
+  name: jenkins-slaves-nodejs
 data:
-  maven-template: |-
+  nodejs-template: |-
     <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
       <inheritFrom></inheritFrom>
-      <name>maven</name>
+      <name>nodejs</name>
       <privileged>false</privileged>
       <alwaysPullImage>false</alwaysPullImage>
       <instanceCap>2147483647</instanceCap>
       <idleMinutes>0</idleMinutes>
-      <label>maven</label>
+      <label>nodejs</label>
       <serviceAccount>jenkins</serviceAccount>
       <nodeSelector></nodeSelector>
       <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
@@ -25,7 +25,7 @@ data:
       <containers>
         <org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate>
           <name>jnlp</name>
-          <image>registry.access.redhat.com/openshift3/jenkins-slave-maven-rhel7</image>
+          <image>registry.access.redhat.com/openshift3/jenkins-agent-nodejs-8-rhel7</image>
           <privileged>false</privileged>
           <alwaysPullImage>false</alwaysPullImage>
           <workingDir>/tmp</workingDir>
